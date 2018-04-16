@@ -1,3 +1,12 @@
+Gauss.jpg : 2DFT image_filters erase format Gauss.dat
+	#
+
+2DFT : 2DFT.cpp
+	c++ 2DFT.cpp -o 2DFT
+
+image_filters : image_filters.cpp
+	c++ image_filters.cpp -o image_filters
+
 Gray.jpg : erase_format Gray.dat
 	python3 image2matrix.py "Sky.jpg" "Gray.dat"
 	./erase_format "Gray.dat" "NFGray.dat"
@@ -11,4 +20,4 @@ erase_format : erase_format.cpp
 	c++ erase_format.cpp -o erase_format
 
 clean :
-	rm -f *.dat Gray.jpg
+	rm -f *.dat Gray.jpg Gauss.jpg
