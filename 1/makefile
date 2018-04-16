@@ -1,8 +1,11 @@
-#Gauss.jpg : image_filters erase_format Gauss.dat
-	#
+Gauss.jpg : image_filters erase_format Gauss.dat Gray.jpg
+	python3 matrix2image.py "Gauss.dat" "Gauss.jpg"
 
-#image_filters : image_filters.cpp
-#	c++ image_filters.cpp -o image_filters
+image_filters : image_filters.cpp
+	c++ image_filters.cpp -o image_filters
+
+Gauss.dat : Gray.dat image_filters
+	./image_filters "Gray.dat" "gaussian" 0.99 "Gauss.dat"
 
 Gray.jpg : erase_format Gray.dat
 	./erase_format "Gray.dat" "NFGray.dat"
@@ -16,4 +19,4 @@ erase_format : erase_format.cpp
 	c++ erase_format.cpp -o erase_format
 
 clean :
-	rm -f *.dat Gray.jpg Gauss.jpg
+	rm -f *.dat Gray.jpg Gauss.jpg image_filters
